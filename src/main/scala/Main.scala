@@ -18,7 +18,7 @@ enum Regexp {
         case OrElse(first, second) =>
           loop(first, idx).orElse(loop(second, idx))
         case Repeat(source) =>
-          loop(source, idx).flatMap { i => loop(source, i) }.orElse(Some(idx))
+          loop(source, idx).flatMap { i => loop(regexp, i) }.orElse(Some(idx))
         case Apply(string) =>
           Option.when(input.startsWith(string, idx))(idx + string.length)
         case Empty => None
